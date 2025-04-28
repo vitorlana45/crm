@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 @Getter
 public enum UserRoleJpa {
     USER(List.of("ROLE_USER")),
-    ADMIN(List.of("ROLE_USER", "ROLE_ADMIN")),
-    MANAGER(List.of("ROLE_USER","ROLE_ADMIN","ROLE_MANAGER"));
+    MANAGER(List.of("ROLE_USER","ROLE_ADMIN","ROLE_MANAGER")),
+    SUPER_ADMIN(List.of("ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")),
+    ORG_OWNER(List.of("ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_ORG_OWNER")),
+    ORG_ADMIN(List.of("ROLE_USER", "ROLE_ADMIN", "ROLE_ORG_ADMIN")),
+    GUEST(List.of("ROLE_GUEST"));
+
 
     private final List<String> authorities;
 

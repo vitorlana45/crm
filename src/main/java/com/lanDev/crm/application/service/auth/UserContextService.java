@@ -9,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class UserContextService {
 
@@ -39,4 +41,15 @@ public class UserContextService {
 
         return UserRoleJpa.valueOf(domainUser.getRole().name());
     }
+
+    public UUID getCurrentUserOrganizationId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        return userDetails.getUser().getOrganizationId();
+    }
+
+    public boolean isSuperAdmin() {
+        return getCurrentUserRole() == UserRoleJpa.SUPER_ADMIN;
+    }
+
 }

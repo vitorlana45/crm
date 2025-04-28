@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class User {
-    private final UUID id;
+    private final UUID uuid;
     private String name;
     private String email;
     private String password;
@@ -13,9 +13,10 @@ public class User {
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private boolean active;
+    private final UUID organizationId;
 
-    public User(UUID id, String name, String email, String password, UserRole role, LocalDateTime createdAt, LocalDateTime updatedAt, boolean active) {
-        this.id = id;
+    public User(UUID uuid, String name, String email, String password, UserRole role, LocalDateTime createdAt, LocalDateTime updatedAt, boolean active, UUID organizationId) {
+        this.uuid = uuid;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -23,24 +24,24 @@ public class User {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.active = active;
+        this.organizationId = organizationId;
     }
 
-    public static User newUser(String name, String email, String password, UserRole role, boolean active) {
+    public static User newUser(String name, String email, String password, UserRole role, boolean active, UUID organizationId) {
         LocalDateTime now = LocalDateTime.now();
-        return new User(UUID.randomUUID(), name, email, password, role, now, now, active
-        );
+        return new User(UUID.randomUUID(), name, email, password, role, now, now, active, organizationId);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(uuid, user.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(uuid);
     }
 
     public void deactivate() {
@@ -58,7 +59,7 @@ public class User {
     }
 
     public UUID getId() {
-        return id;
+        return uuid;
     }
 
 
@@ -81,4 +82,33 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public UUID getOrganizationId() {
+        return organizationId;
+    }
+
 }

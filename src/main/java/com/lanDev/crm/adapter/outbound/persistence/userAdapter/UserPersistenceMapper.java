@@ -1,4 +1,4 @@
-package com.lanDev.crm.adapter.outbound.persistence.entity.user.mapper;
+package com.lanDev.crm.adapter.outbound.persistence.userAdapter;
 
 import com.lanDev.crm.adapter.outbound.persistence.entity.user.UserJpaEntity;
 import com.lanDev.crm.domain.model.user.User;
@@ -12,7 +12,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface UserPersistenceMapper {
 
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "uuid", ignore = true)
     @Mapping(target = "active", source = "active")
     UserJpaEntity toEntity(User user);
 

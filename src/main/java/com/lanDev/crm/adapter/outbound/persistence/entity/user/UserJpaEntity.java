@@ -1,6 +1,7 @@
 package com.lanDev.crm.adapter.outbound.persistence.entity.user;
 
 import com.lanDev.crm.adapter.outbound.persistence.entity.VersionedAuditable;
+import com.lanDev.crm.adapter.outbound.persistence.entity.organization.OrganizationJpaEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class UserJpaEntity extends VersionedAuditable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID uuid;
 
     private String name;
 
@@ -36,17 +37,20 @@ public class UserJpaEntity extends VersionedAuditable {
     @Column(name = "role", nullable = false)
     private UserRoleJpa role;
 
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private OrganizationJpaEntity organization;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UserJpaEntity that = (UserJpaEntity) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(uuid, that.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(uuid);
     }
 
 }
